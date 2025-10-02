@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import Header from '@/components/header/Header';
 import { Separator } from '@/components/ui/separator';
+import { PostsLastPageProvider } from './lib/contexts/PostsLastPageProvider';
 import './App.css';
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
         <Header />
         <Separator className="sticky top-19" />
         <main className="max-w-4xl mx-auto px-4 pb-8">
-          <Outlet />
+          <PostsLastPageProvider>
+            <Outlet />
+          </PostsLastPageProvider>
         </main>
       </QueryClientProvider>
     </>

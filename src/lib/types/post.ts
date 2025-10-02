@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface Post {
     id: number;
     title: string;
@@ -22,4 +24,9 @@ export interface ClassnameProps {
     isActive: boolean;
     isPending: boolean;
     isTransitioning: boolean;
+}
+
+export interface PostsLastPageState {
+    page: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
 }

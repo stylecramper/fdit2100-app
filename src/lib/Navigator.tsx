@@ -4,6 +4,7 @@ import LatestPosts from "@/components/latestPosts/LatestPosts";
 import Members from "@/screens/members/Members";
 import Messages from "@/screens/messages/Messages";
 import Notifications from "@/screens/notifications/Notifications";
+import NotFound from "@/screens/notFound/NotFound";
 
 const routes: RouteObject[] = [
     {
@@ -25,6 +26,10 @@ const routes: RouteObject[] = [
             {
                 path: '/notifications',
                 Component: Notifications
+            },
+            {
+                path: '*',
+                Component: NotFound
             }
         ]
     }

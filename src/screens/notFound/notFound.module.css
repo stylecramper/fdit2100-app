@@ -1,0 +1,13 @@
+.shrugOnDark {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .shrugOnDark {
+        display: inline;
+    }
+
+    .shrugOnLight {
+        display: none;
+    }
+}
