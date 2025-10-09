@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+.memberBio {
+    @apply mb-6 text-sm text-gray-600 dark:text-gray-200;
+}
+
+.viewPostsButton {
+    @apply text-black dark:text-gray-600 dark:bg-gray-200;
+}

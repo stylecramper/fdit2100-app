@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.membersHeading {
+    @apply sticky z-1 top-[77px] w-full flex justify-between pt-8 bg-white dark:bg-[#242424];
+}

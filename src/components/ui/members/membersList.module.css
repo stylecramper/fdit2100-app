@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.searchField {
+    @apply w-[98%] my-1 ml-1 pl-10 bg-gray-100 dark:bg-gray-800;
+}
