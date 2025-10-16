@@ -18,6 +18,7 @@ export default function Post(props: Props) {
                 <article className="mr-4">
                     <h3 className="mb-1 text-xl font-semibold">{post.title}</h3>
                     <p className={styles.postBody}>{post.body}</p>
+                    <img src={`/photos/${post.id}.jpg`} alt={post.title} className="inline-block md:hidden aspect-[7/4] h-42 object-cover ml-auto rounded-lg" />
                     <div className="my-6">
                         {post.tags.map(tag => (
                             <Tag key={tag} tag={tag} />
@@ -31,7 +32,7 @@ export default function Post(props: Props) {
                         <span className={styles.postLikesAndViews}>{post.views} views</span>
                     </div>
                 </article>
-                <img src={`/photos/${post.id}.jpg`} alt={post.title} className="aspect-[7/4] h-42 object-cover ml-auto rounded-lg" />
+                <img src={`/photos/${post.id}.jpg`} alt={post.title} className="hidden md:inline-block aspect-[7/4] h-42 object-cover ml-auto rounded-lg" />
             </div>
             {!isLast && <Separator className="!w-auto mx-4 mt-5 mb-10" />}
         </li>
