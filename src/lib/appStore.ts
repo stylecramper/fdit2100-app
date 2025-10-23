@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { loginUser } from './api';
@@ -29,7 +30,12 @@ const createUserSlice = (set): AppStoreUser => ({
             set({ user: response, isAuthenticated: true, isLoading: false});
             return response;
         } catch(error) {
-            set({ error: (error as Error).message, isLoading: false });
+            console.log('### error', error);
+            if (error instanceof AxiosError) {
+                set({ error: error.response?.data.message, isLoading: false });
+            } else {
+                set({ error: 'An unknown error occurred', isLoading: false })
+            }
         }
     },
     logout: () => {

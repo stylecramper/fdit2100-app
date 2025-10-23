@@ -27,5 +27,8 @@ export function loginUser(credentials: LoginCredentials): Promise<AuthResponse> 
         username: credentials.username,
         password: credentials.password
     })
-        .then(response => response.data);
+        .then(response => response.data)
+        .catch(error => {
+            return Promise.reject(error);
+        });
 }
