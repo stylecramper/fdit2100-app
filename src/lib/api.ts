@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { type PostsResponse } from './types/post';
-import { type MembersResponse } from './types/member';
+import {
+    type AuthResponse,
+    type LoginCredentials,
+    type MembersResponse
+} from './types/member';
 import { API_BASE_URL, POSTS_PER_PAGE } from '@/lib/constants';
 
 export function fetchPosts(page: number) {
@@ -15,5 +19,13 @@ export function fetchMembers(): Promise<MembersResponse> {
 
 export function fetchPostsByMember(memberId: number): Promise<PostsResponse> {
     return axios.get(`${API_BASE_URL}/posts/user/${memberId}`)
+        .then(response => response.data);
+}
+
+export function loginUser(credentials: LoginCredentials): Promise<AuthResponse> {
+    return axios.post(`${API_BASE_URL}/auth/login`, {
+        username: credentials.username,
+        password: credentials.password
+    })
         .then(response => response.data);
 }
