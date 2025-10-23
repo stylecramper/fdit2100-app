@@ -23,3 +23,7 @@
 .sheetButton {
     @apply md:hidden dark:bg-gray-100;
 }
+
+.signOutButton {
+    @apply bg-white text-xs dark:bg-[#242424] text-black dark:text-white;
+}

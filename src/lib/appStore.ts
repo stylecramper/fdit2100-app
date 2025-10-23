@@ -18,7 +18,8 @@ interface UserActions {
 
 type AppStoreUser = UserActions & UserState;
 
-const createUserSlice = (set): AppStoreUser => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createUserSlice = (set: any): AppStoreUser => ({
     user: null,
     isAuthenticated: false,
     isLoading: false,
