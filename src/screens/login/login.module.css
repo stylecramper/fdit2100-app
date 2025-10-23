@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+.loginButton {
+    @apply w-full bg-[rgb(61,153,245)] text-white font-extrabold;
+}
+
+.input {
+    @apply bg-slate-100 dark:bg-slate-600 placeholder-slate-600 dark:placeholder-slate-100;
+}
