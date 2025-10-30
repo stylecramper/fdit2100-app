@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import Header from '@/components/header/Header';
 import { Separator } from '@/components/ui/separator';
+import { Toaster } from '@/components/ui/sonner';
 import { PostsLastPageProvider } from './lib/contexts/PostsLastPageProvider';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
             <Outlet />
           </PostsLastPageProvider>
         </main>
+        <Toaster/>
       </QueryClientProvider>
     </>
   )

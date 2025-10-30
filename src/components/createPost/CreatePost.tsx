@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { useNavigate } from "react-router";
 import { z } from "zod";
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,8 @@ import {
 } from '@/components/ui/select';
 import TagChip from '@/components/createPost/TagChip';
 import { Textarea } from '@/components/ui/textarea';
+import { useAppStore } from '@/lib/appStore';
+import { CREATE_POST_AUTH_NOTICE } from '@/lib/constants';
 import styles from '@/components/latestPosts/latestPosts.module.css';
 
 const allTags = [
@@ -68,6 +71,12 @@ export default function CreatePost() {
     });
     const navigate = useNavigate();
 
+    const { isAuthenticated } = useAppStore();
+
+    if (!isAuthenticated) {
+        toast.error(CREATE_POST_AUTH_NOTICE, { position: 'top-right' });
+    }
+
     const addTag = useCallback((tag: string) => {
         if (tag && !selectedTags.includes(tag)) {
             setSelectedTags([...selectedTags, tag]);
@@ -80,7 +89,7 @@ export default function CreatePost() {
         setAvailableTags([...availableTags, tag]);
     }, [availableTags, selectedTags]);
 
-    return <Dialog defaultOpen onOpenChange={(open) => {
+    return isAuthenticated && (<Dialog defaultOpen onOpenChange={(open) => {
         if (!open) {
             navigate(-1);
         }
@@ -150,5 +159,5 @@ export default function CreatePost() {
                 <Button className={styles.create_post_button} onClick={() => navigate(-1)}>Post</Button>
             </DialogFooter>
         </DialogContent>
-    </Dialog>
+    </Dialog>)
 }
