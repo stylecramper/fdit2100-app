@@ -50,7 +50,7 @@ export default function Login() {
                         control={form.control}
                         name="username"
                         render={(({ field }) => (
-                            <FormItem>
+                            <FormItem className="mb-4">
                                 <FormControl>
                                     <Input placeholder="Username" className={styles.input} {...field} />
                                 </FormControl>
@@ -62,7 +62,7 @@ export default function Login() {
                         control={form.control}
                         name="password"
                         render={(({ field }) => (
-                            <FormItem>
+                            <FormItem className="mb-4">
                                 <FormControl>
                                     <Input type="password" placeholder="Password" className={styles.input} {...field} />
                                 </FormControl>

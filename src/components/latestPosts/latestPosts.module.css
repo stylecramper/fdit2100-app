@@ -11,3 +11,15 @@
 .latest_posts_container {
     @apply sticky top-[77px] flex justify-between pt-8 bg-white dark:bg-[#242424];
 }
+
+.dialog {
+    @apply bg-white dark:bg-[#242424];
+}
+
+.dialogTitle {
+    @apply mt-6 text-4xl font-bold text-black dark:text-white;
+}
+
+.body {
+    @apply max-h-40;
+}
