@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useNavigate } from "react-router";
+import { useQueryClient } from '@tanstack/react-query';
 import { z } from "zod";
 import { Button } from '@/components/ui/button';
 import {
@@ -32,8 +33,10 @@ import {
 } from '@/components/ui/select';
 import TagChip from '@/components/createPost/TagChip';
 import { Textarea } from '@/components/ui/textarea';
+import { createPost } from '@/lib/api';
 import { useAppStore } from '@/lib/appStore';
 import { CREATE_POST_AUTH_NOTICE } from '@/lib/constants';
+import type { Post, PostsCacheState } from '@/lib/types/post';
 import styles from '@/components/latestPosts/latestPosts.module.css';
 
 const allTags = [
@@ -70,8 +73,9 @@ export default function CreatePost() {
         },
     });
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
-    const { isAuthenticated } = useAppStore();
+    const { isAuthenticated, user } = useAppStore();
 
     if (!isAuthenticated) {
         toast.error(CREATE_POST_AUTH_NOTICE, { position: 'top-right' });
@@ -88,6 +92,26 @@ export default function CreatePost() {
         setSelectedTags(selectedTags.filter((t) => t !== tag));
         setAvailableTags([...availableTags, tag]);
     }, [availableTags, selectedTags]);
+
+    const addPost = useCallback(async () => {
+        const newPost: Post = await createPost(
+            user!.id,
+            user!.accessToken,
+            form.getValues('title'),
+            form.getValues('body'),
+            selectedTags
+        );
+        newPost.reactions = {
+            likes: 0,
+            dislikes: 0
+        };
+        newPost.views = 0;
+        queryClient.setQueryData(['posts'], (oldData: PostsCacheState) => {
+            oldData.pages[0].posts.unshift(newPost);
+            return oldData;
+        });
+        navigate('/');
+    }, [form, navigate, queryClient, selectedTags, user]);
 
     return isAuthenticated && (<Dialog defaultOpen onOpenChange={(open) => {
         if (!open) {
@@ -156,7 +180,7 @@ export default function CreatePost() {
                 </form>
             </Form>
             <DialogFooter>
-                <Button className={styles.create_post_button} onClick={() => navigate(-1)}>Post</Button>
+                <Button className={styles.create_post_button} onClick={addPost}>Post</Button>
             </DialogFooter>
         </DialogContent>
     </Dialog>)

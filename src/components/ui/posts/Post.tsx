@@ -11,6 +11,7 @@ interface Props {
 
 export default function Post(props: Props) {
     const { post, isLast } = props;
+    console.log('##post', post);
 
     return (
         <li key={post.id}>

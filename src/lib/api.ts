@@ -32,3 +32,19 @@ export function loginUser(credentials: LoginCredentials): Promise<AuthResponse> 
             return Promise.reject(error);
         });
 }
+
+export function createPost(userId: number, token: string, title: string, body: string, tags: string[]): Promise<Post> {
+    return axios.post(`${API_BASE_URL}/posts/add`, {
+        userId,
+        title,
+        body,
+        tags,
+    },
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }
+)
+    .then(response => response.data);
+}

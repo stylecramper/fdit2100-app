@@ -26,6 +26,11 @@ export interface ClassnameProps {
     isTransitioning: boolean;
 }
 
+export interface PostsCacheState {
+    pageParams: number[];
+    pages: PostsResponse[];
+}
+
 export interface PostsLastPageState {
     page: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
